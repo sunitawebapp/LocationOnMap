@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mian_nav"
+    app:startDestination="@id/homeFragment">
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.sunitawebapp.locationonmap.ui.fragment.HomeFragment"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_homeFragment_to_currentLocationFragment"
+            app:destination="@id/currentLocationFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_drawPolylineFragment"
+            app:destination="@id/drawPolylineFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_carMoveFragment"
+            app:destination="@id/carMoveFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/currentLocationFragment"
+        android:name="com.sunitawebapp.locationonmap.ui.fragment.CurrentLocationFragment"
+        android:label="fragment_current_location"
+        tools:layout="@layout/fragment_current_location" />
+    <fragment
+        android:id="@+id/drawPolylineFragment"
+        android:name="com.sunitawebapp.locationonmap.ui.fragment.DrawPolylineFragment"
+        android:label="fragment_draw_polyline"
+        tools:layout="@layout/fragment_draw_polyline" />
+    <fragment
+        android:id="@+id/carMoveFragment"
+        android:name="com.sunitawebapp.locationonmap.ui.fragment.CarMoveFragment"
+        android:label="fragment_car_move"
+        tools:layout="@layout/fragment_car_move" />
+</navigation>
