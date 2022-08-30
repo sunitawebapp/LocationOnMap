@@ -3,6 +3,8 @@ package com.sunitawebapp.locationonmap.ui.fragment
 
 import android.Manifest
 import android.content.pm.PackageManager
+import android.location.Address
+import android.location.Geocoder
 import android.location.Location
 import android.os.Bundle
 import android.util.Log
@@ -24,6 +26,7 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import com.sunitawebapp.locationonmap.R
 import com.sunitawebapp.locationonmap.databinding.FragmentCurrentLocationBinding
+import java.util.*
 
 
 class CurrentLocationFragment : Fragment() ,View.OnClickListener, OnMapReadyCallback {
@@ -55,7 +58,10 @@ class CurrentLocationFragment : Fragment() ,View.OnClickListener, OnMapReadyCall
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        var smf =requireActivity().getSupportFragmentManager().findFragmentById(R.id.map) as SupportMapFragment
+     /*   var smf =requireActivity().getSupportFragmentManager().findFragmentById(R.id.map) as SupportMapFragment
+        smf.getMapAsync(this);*/
+
+        var smf =  getChildFragmentManager().findFragmentById(R.id.map) as SupportMapFragment
         smf.getMapAsync(this);
 
 
@@ -141,7 +147,7 @@ class CurrentLocationFragment : Fragment() ,View.OnClickListener, OnMapReadyCall
 
         mMap = map;
 
-        // Add a marker in Location and move the camera
+     /*   // Add a marker in Location and move the camera
         val loc = LatLng(22.6230272, 88.4441088)
         mMap.addMarker(
             MarkerOptions()
@@ -150,8 +156,42 @@ class CurrentLocationFragment : Fragment() ,View.OnClickListener, OnMapReadyCall
         )
 
         mMap.moveCamera(CameraUpdateFactory.newLatLng(loc))
-      //  mMap.animateCamera(CameraUpdateFactory.zoomTo(15f), 2000, null);
+      //  mMap.animateCamera(CameraUpdateFactory.zoomTo(15f), 2000, null);*/
+
+
+          mMap!!.addMarker(
+          MarkerOptions()
+              .position(LatLng(22.6131968, 88.4310016))
+              .title("Check Out Location")
+      )
+      val cameraPosition = CameraPosition.Builder().target(LatLng(22.6131968, 88.4310016))
+          .zoom(17f)
+          .bearing(0f)
+          .tilt(45f)
+          .build()
+      mMap!!.moveCamera(CameraUpdateFactory.newLatLng(LatLng(22.6131968, 88.4310016)))
+      mMap!!.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
+      mMap!!.animateCamera(CameraUpdateFactory.zoomTo(12f), 2000, null);
 
     }
+    private fun stringToLatLong(latLongStr: String): LatLng{
 
+
+        val geocoder = Geocoder(requireContext(), Locale.getDefault())
+
+
+        val latlong = latLongStr.split(",").toTypedArray()
+        val latitude = latlong[0].toDouble()
+        val longitude = latlong[1].toDouble()
+
+        val addresses: List<Address> = geocoder.getFromLocation(latitude, longitude, 1)
+        val strReturnedAddress = StringBuilder("")
+        var  returnedAdd = addresses[0]
+
+        for (i in 0..returnedAdd.getMaxAddressLineIndex()) {
+            strReturnedAddress.append(returnedAdd.getAddressLine(i)).append("\n")
+        }
+      var  returnedAddress = strReturnedAddress.toString()
+        return LatLng(latitude, longitude)
+    }
 }
