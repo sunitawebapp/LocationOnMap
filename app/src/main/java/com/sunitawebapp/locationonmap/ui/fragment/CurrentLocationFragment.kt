@@ -5,6 +5,7 @@ import android.Manifest
 import android.content.pm.PackageManager
 import android.location.Location
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -18,7 +19,9 @@ import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
+import com.google.android.gms.maps.model.CameraPosition
 import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.MarkerOptions
 import com.sunitawebapp.locationonmap.R
 import com.sunitawebapp.locationonmap.databinding.FragmentCurrentLocationBinding
 
@@ -26,10 +29,10 @@ import com.sunitawebapp.locationonmap.databinding.FragmentCurrentLocationBinding
 class CurrentLocationFragment : Fragment() ,View.OnClickListener, OnMapReadyCallback {
 
     private var mFusedLocationClient: FusedLocationProviderClient? = null
-    var mMap: GoogleMap? = null
+    lateinit var mMap: GoogleMap
     lateinit var binding : FragmentCurrentLocationBinding
-     var  lat : Double =0.0
-    var lng : Double = 0.0
+     var  lat : Double =22.6131968
+    var lng : Double = 88.4310016
 
     var lastKnownLocation: Location? = null
 
@@ -52,24 +55,9 @@ class CurrentLocationFragment : Fragment() ,View.OnClickListener, OnMapReadyCall
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-
-
-
-
-        super.onViewCreated(view, savedInstanceState)
-    }
-
-    override fun onClick(view: View?) {
-     when(view){
-       binding.btnLoc -> {
-           getCurrentloaction()
-       }
-     }
-    }
-
-    fun getCurrentloaction(){
         var smf =requireActivity().getSupportFragmentManager().findFragmentById(R.id.map) as SupportMapFragment
-      //  smf.getMapAsync(this);
+        smf.getMapAsync(this);
+
 
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(requireActivity());
 
@@ -85,29 +73,84 @@ class CurrentLocationFragment : Fragment() ,View.OnClickListener, OnMapReadyCall
             }
         }
 
-        mFusedLocationClient!!.getLastLocation().addOnSuccessListener(requireActivity()) { location ->
+     /*   mFusedLocationClient!!.getLastLocation().addOnSuccessListener(requireActivity()) { location ->
             if (location != null) {
                 lat = location.getLatitude()
-                 lng = location.getLongitude()
-            //    mMap!!.moveCamera(CameraUpdateFactory.newLatLngZoom(LatLng(lat, lng), 15f))
+                lng = location.getLongitude()
+                //    mMap!!.moveCamera(CameraUpdateFactory.newLatLngZoom(LatLng(lat, lng), 15f))
                 Toast.makeText(requireContext(),"$lat , $lng" ,Toast.LENGTH_SHORT).show()
+                Log.d("sunita", "onViewCreated: "+"$lat , $lng")
             }
-        }
+        }*/
+
+
+        // Obtain the SupportMapFragment and get notified when the map is ready to be used.
+      /*  val mapFragment =requireActivity().supportFragmentManager
+            .findFragmentById(R.id.map) as SupportMapFragment
+        mapFragment.getMapAsync(this)*/
+
+      /*  val mapFragment =requireActivity(). supportFragmentManager.findFragmentById(R.id.map) as? SupportMapFragment
+        mapFragment?.getMapAsync(this)*/
+        super.onViewCreated(view, savedInstanceState)
+    }
+
+    override fun onClick(view: View?) {
+     when(view){
+       binding.btnLoc -> {
+           // Add a marker in Location and move the camera
+           /*val loc = LatLng(22.6230272, 88.4441088)
+           mMap.addMarker(
+               MarkerOptions()
+                   .position(loc)
+                   .title("Marker in Location")
+           )
+
+           mMap.moveCamera(CameraUpdateFactory.newLatLng(loc))*/
+           getCurrentloaction()
+       }
+     }
+    }
+
+    fun getCurrentloaction(){
+
+      /*  mMap!!.addMarker(
+            MarkerOptions()
+                .position(LatLng(22.6131968, 88.4310016))
+                .title("Check Out Location")
+        )
+        val cameraPosition = CameraPosition.Builder().target(LatLng(22.6131968, 88.4310016))
+            .zoom(17f)
+            .bearing(0f)
+            .tilt(45f)
+            .build()
+        mMap!!.moveCamera(CameraUpdateFactory.newLatLng(LatLng(22.6131968, 88.4310016)))
+        mMap!!.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
+        mMap!!.animateCamera(CameraUpdateFactory.zoomTo(12f), 2000, null);*/
 
     }
 
-    override fun onRequestPermissionsResult(
+  /*  override fun onRequestPermissionsResult(
         requestCode: Int,
         permissions: Array<out String>,
         grantResults: IntArray
     ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-    }
+    }*/
 
-    override fun onMapReady(map: GoogleMap?) {
+    override fun onMapReady(map: GoogleMap) {
 
         mMap = map;
 
+        // Add a marker in Location and move the camera
+        val loc = LatLng(22.6230272, 88.4441088)
+        mMap.addMarker(
+            MarkerOptions()
+                .position(loc)
+                .title("Marker in Location")
+        )
+
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(loc))
+      //  mMap.animateCamera(CameraUpdateFactory.zoomTo(15f), 2000, null);
 
     }
 
