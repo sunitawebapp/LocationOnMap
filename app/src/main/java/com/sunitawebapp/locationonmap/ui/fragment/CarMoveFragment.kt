@@ -27,4 +27,30 @@ class CarMoveFragment : Fragment() {
     }
 
 
+    /*      mTicker =  Runnable() {
+              fun run() {
+                  val handler = Handler()
+                  handler.postDelayed({
+                      if (currentPt < polyLinePoints!!.size) {
+                          //post again
+                          Log.d("tess", "inside run ")
+                          val targetLocation = Location(LocationManager.GPS_PROVIDER)
+                          targetLocation.latitude = polyLinePoints!![currentPt].latitude
+                          targetLocation.longitude = polyLinePoints!![currentPt].longitude
+                          // animateMarkerNew(targetLocation, mMarker);
+                          HRMarkerAnimation(mMap, 1000, object : UpdateLocationCallBack {
+                              override  fun onUpdatedLocation(updatedLocation: Location?) {}
+                          }).animateMarker(targetLocation, targetLocation, marker)
+                          handler.postDelayed(mTicker!!, 3000)
+                          currentPt++
+                      } else {
+                          Log.d("tess", "call back removed")
+                          //removed callbacks
+                          handler.removeCallbacks(mTicker!!)
+                      }
+                  }, 3000)
+              }
+              mTicker!!.run();
+
+          }*/
 }
