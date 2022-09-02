@@ -23,6 +23,7 @@ import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.*
+import com.google.firebase.database.FirebaseDatabase
 import com.sunitawebapp.locationonmap.R
 import com.sunitawebapp.locationonmap.moveCarmarkerAnimation.AnimationClass.HRMarkerAnimation
 import com.sunitawebapp.locationonmap.moveCarmarkerAnimation.CallBacks.UpdateLocationCallBack
@@ -62,6 +63,10 @@ class DrawPolylineFragment : Fragment(),OnMapReadyCallback, DirectionCallback {
             .findFragmentById(R.id.map) as SupportMapFragment
 
         smf.getMapAsync(this);
+
+        var firebasedatabase= FirebaseDatabase.getInstance()
+        var databasereference= firebasedatabase.getReference("Driver")
+
     }
 
     override fun onMapReady(p0: GoogleMap?) {

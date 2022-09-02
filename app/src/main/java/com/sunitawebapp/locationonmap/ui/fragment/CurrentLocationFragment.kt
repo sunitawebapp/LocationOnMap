@@ -41,7 +41,7 @@ class CurrentLocationFragment : Fragment() ,View.OnClickListener, OnMapReadyCall
         super.onCreate(savedInstanceState)
 
         //https://maps.googleapis.com/maps/api/directions/json?mode=driving&transit_routing_preference=less_driving&origin=24.9994173,%2088.1388895&destination=22.7225126,%2088.4649025&key=AIzaSyDXag1Tt3SDyc_RWQQcsCrs3Ez7dRWwBEo
-
+       //https://maps.googleapis.com/maps/api/directions/json?mode=driving&transit_routing_preference=less_driving&origin=24.9994173,%2088.1388895&destination=22.7225126,%2088.4649025&key=AIzaSyA8L9aa4XUlVIGkSCgBevpsF-WFoj6nRDs
     }
 
     override fun onCreateView(

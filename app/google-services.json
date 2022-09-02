@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "74420765399",
+    "project_id": "locationonmap-4b841",
+    "storage_bucket": "locationonmap-4b841.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:74420765399:android:948e9d0b4ce528b6bc2692",
+        "android_client_info": {
+          "package_name": "com.sunitawebapp.locationonmap"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "74420765399-o9fa29q3sn53dfldrrk9kkfl2oied3bf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCzmOjQLD6qWbWdxFCyRoV7vnGyFTjGBoM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "74420765399-o9fa29q3sn53dfldrrk9kkfl2oied3bf.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
