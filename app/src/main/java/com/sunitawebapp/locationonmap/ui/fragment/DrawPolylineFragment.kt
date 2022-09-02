@@ -66,6 +66,18 @@ class DrawPolylineFragment : Fragment(),OnMapReadyCallback, DirectionCallback {
 
         var firebasedatabase= FirebaseDatabase.getInstance()
         var databasereference= firebasedatabase.getReference("Driver")
+        var sourcelat=databasereference.child("SourceLocation").child("latitude")
+        var sourcelng=databasereference.child("SourceLocation").child("longitude")
+
+        sourcelat.setValue(24.9994173, 88.1388895).addOnSuccessListener {
+          //  Toast.makeText(requireContext(),it.toString(),Toast.LENGTH_SHORT).show()
+           // Log.d(TAG, "onViewCreated: "+it.toString())
+        }.addOnCanceledListener {
+            Toast.makeText(requireContext(),"cencel",Toast.LENGTH_SHORT).show()
+        }
+
+
+    //    databasereference.setValue(sourcelat,sourcelng)
 
     }
 
